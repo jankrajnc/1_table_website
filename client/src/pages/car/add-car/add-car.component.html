@@ -1,0 +1,81 @@
+<form [formGroup]="carData" (ngSubmit)="saveCar()" class="formContainer">
+
+    <!------------------------------------------------------- Row 1 ------------------------------------------------------->
+    <div class="form-group row">
+
+        <!-- Brand -->
+        <div class="col-sm-4">
+            <label for="brand">Brand: *</label>
+            <input [ngClass]="{'invalidSubmit': invalidForm === 1 }" type="text" class="form-control"
+                formControlName="brand" [maxlength]="255">
+        </div>
+
+        <!-- Make -->
+        <div class="col-sm-4">
+            <label for="make">Make: *</label>
+            <input [ngClass]="{'invalidSubmit': invalidForm === 1 }" type="text" class="form-control"
+                formControlName="make" [maxlength]="255">
+        </div>
+
+        <!-- Color -->
+        <div class="col-sm-4">
+            <label for="color">Color:</label>
+            <input type="text" class="form-control"
+                formControlName="color" [maxlength]="255">
+        </div>
+
+    </div>
+
+    <!------------------------------------------------------- Row 2 ------------------------------------------------------->
+    <div class="form-group row">
+
+        <!-- CCs -->
+        <div class="col-sm-3">
+            <label for="ccs">CCs: *</label>
+            <input [ngClass]="{'invalidSubmit': invalidForm === 1 }" type="number" class="form-control"
+                formControlName="ccs" [maxlength]="255">
+        </div>
+
+        <!-- Horsepower -->
+        <div class="col-sm-3">
+            <label for="hp">Horsepower: *</label>
+            <input [ngClass]="{'invalidSubmit': invalidForm === 1 }" type="number" class="form-control"
+                formControlName="hp" [maxlength]="255">
+        </div>
+
+        <!-- Price -->
+        <div class="col-sm-3">
+            <label for="price">Price: *</label>
+            <input [ngClass]="{'invalidSubmit': invalidForm === 1 }" type="number" class="form-control"
+                formControlName="price" [maxlength]="255">
+        </div>
+
+        <!-- Electric -->
+        <div class="col-sm-3">
+            <label for="electric">Electric: *</label>
+            <select [ngClass]="{'invalidSubmit': invalidForm === 1 }" class="form-control" formControlName="electric">
+                <option [ngValue]="0">No</option>
+                <option [ngValue]="1">Yes</option>
+            </select>
+            <small class="form-text text-muted">
+                Is the car electric
+            </small>
+        </div>
+
+    </div>
+
+    <!------------------------------------------------------- BREAK ------------------------------------------------------->
+    <hr class="lineBreak">
+    <!------------------------------------------------------- BREAK ------------------------------------------------------->
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-center">
+        <div class="col-xs-1">
+            <button type="button" class="btn btn-primary me-3" (click)="cancelCreation()">Cancel</button>
+        </div>
+        <div class="col-xs-1">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+
+</form>

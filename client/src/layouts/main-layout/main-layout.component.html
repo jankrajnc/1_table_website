@@ -1,0 +1,36 @@
+<!-- Navigation bar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand py-0 d-inline-block align-center" href="./home">
+      Car Register
+    </a>
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="./car-table">
+          <span class="fas fa-list-ul text-secondary"></span>
+          Car Table
+        </a>
+      </li>
+      <!--<li class="nav-item">
+        <a class="nav-link d-inline-block" href="./settings">
+          <span class="fas fa-cog text-secondary"></span>
+          Settings
+        </a>
+      </li>-->
+      <!--<li class="nav-item" *ngIf="loggedIn">
+        <a class="nav-link d-inline-block" (click)="logout()" href="javascript:void(0);">
+          <span class="fas fa-sign-out-alt text-secondary"></span>
+          Logout
+        </a>
+      </li>-->
+      <!--<li class="nav-item" *ngIf="!loggedIn">
+        <a class="nav-link d-inline-block" href="./login">
+          <span class="fas fa-sign-in-alt text-secondary"></span>
+          Login
+        </a>
+      </li>-->
+    </ul>
+  </nav>
+  
+  <router-outlet></router-outlet>

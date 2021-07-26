@@ -1,0 +1,77 @@
+<div *ngIf="isDataAvailable">
+    <form [formGroup]="carData" class="formContainer">
+
+        <!------------------------------------------------------- Row 1 ------------------------------------------------------->
+        <div class="form-group row">
+
+            <!-- Brand -->
+            <div class="col-sm-4">
+                <label for="brand">Brand: *</label>
+                <input type="text" class="form-control" formControlName="brand" [maxlength]="255" readonly>
+            </div>
+
+            <!-- Make -->
+            <div class="col-sm-4">
+                <label for="make">Make: *</label>
+                <input type="text" class="form-control" formControlName="make" [maxlength]="255" readonly>
+            </div>
+
+            <!-- Color -->
+            <div class="col-sm-4">
+                <label for="color">Color:</label>
+                <input type="text" class="form-control" formControlName="color" [maxlength]="255" readonly>
+            </div>
+
+        </div>
+
+        <!------------------------------------------------------- Row 2 ------------------------------------------------------->
+        <div class="form-group row">
+
+            <!-- CCs -->
+            <div class="col-sm-3">
+                <label for="ccs">CCs: *</label>
+                <input type="number" class="form-control" formControlName="ccs" [maxlength]="255" readonly>
+            </div>
+
+            <!-- Horsepower -->
+            <div class="col-sm-3">
+                <label for="hp">Horsepower: *</label>
+                <input type="number" class="form-control" formControlName="hp" [maxlength]="255" readonly>
+            </div>
+
+            <!-- Price -->
+            <div class="col-sm-3">
+                <label for="price">Price: *</label>
+                <input type="number" class="form-control" formControlName="price" [maxlength]="255" readonly>
+            </div>
+
+            <!-- Electric -->
+            <div class="col-sm-3">
+                <label for="electric">Electric: *</label>
+                <select class="form-control" formControlName="electric" readonly>
+                    <option [ngValue]="0">No</option>
+                    <option [ngValue]="1">Yes</option>
+                </select>
+                <small class="form-text text-muted">
+                    Is the car electric
+                </small>
+            </div>
+
+        </div>
+
+        <!------------------------------------------------------- BREAK ------------------------------------------------------->
+        <hr class="lineBreak">
+        <!------------------------------------------------------- BREAK ------------------------------------------------------->
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-center">
+            <div class="col-xs-1">
+                <button type="button" class="btn btn-primary me-3" (click)="returnToTable()">Return</button>
+            </div>
+            <div class="col-xs-1">
+                <button type="submit" class="btn btn-primary" (click)="editCar()">Edit</button>
+            </div>
+        </div>
+
+    </form>
+</div>
