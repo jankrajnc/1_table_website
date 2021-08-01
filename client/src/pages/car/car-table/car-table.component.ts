@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { CarRestService } from "../../../apis/car-rest.service";
+import { CarRest } from "../../../apis/car-rest";
 import { Car } from "../../../models/car";
 
 
@@ -25,7 +25,7 @@ export class CarTableComponent implements OnInit {
   public columnDefinitions: any;
 
   // Other variables.
-  private carRestApi: CarRestService = new CarRestService(this.http);
+  private carRestApi: CarRest = new CarRest(this.http);
   private carModel: Car = new Car();
 
 

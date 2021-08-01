@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Car } from 'src/models/car';
-import { CarRestService } from '../../../apis/car-rest.service';
+import { CarRest } from '../../../apis/car-rest';
 
 @Component({
   selector: 'app-edit-car',
@@ -20,7 +20,7 @@ export class EditCarComponent implements OnInit {
   public invalidForm = 0;
   public isDataAvailable!: boolean;
   private id!: number;
-  private carRestService = new CarRestService(this.http);
+  private carRestService = new CarRest(this.http);
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private activatedRouter: ActivatedRoute) { }
 

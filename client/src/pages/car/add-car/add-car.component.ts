@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Car } from 'src/models/car';
-import { CarRestService } from '../../../apis/car-rest.service';
+import { CarRest } from '../../../apis/car-rest';
 
 @Component({
   selector: 'app-add-car',
@@ -18,7 +18,7 @@ export class AddCarComponent implements OnInit {
   /*========================================================================================*/
   public carData!: FormGroup;
   public invalidForm = 0;
-  private carRestService = new CarRestService(this.http);
+  private carRestService = new CarRest(this.http);
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
 

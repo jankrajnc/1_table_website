@@ -1,1 +1,38 @@
-<p>login works!</p>
+<div class="container">
+    <div class="d-flex justify-content-center">
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Log In</h3>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="loginData" (ngSubmit)="loginUser()" class="formContainer">
+                    <div class="input-group mb-2">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <input [ngClass]="{'invalidSubmit': toggleCSS === 1 }" type="text" class="form-control"
+                            formControlName="username" placeholder="Username">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        <input [ngClass]="{'invalidSubmit': toggleCSS === 1 }" type="password" class="form-control"
+                            formControlName="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <small *ngIf="!authenticationStatus" class="text-danger">
+                            Login failed! Invalid username or password.
+                        </small>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="col-xs-1">
+                            <button type="button" class="btn btn-primary me-2" (click)="cancelLogin()">Cancel</button>
+                        </div>
+                        <div class="col-xs-1">
+                            <input type="submit" value="Log In" class="btn btn-primary">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

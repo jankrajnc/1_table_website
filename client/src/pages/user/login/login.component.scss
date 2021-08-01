@@ -1,0 +1,21 @@
+.container{
+	margin-top: 3%;
+}
+
+.card{
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 400px;
+}
+
+form input.ng-invalid:focus{
+	border: 2px solid red;
+}
+
+form input.ng-valid:focus{
+	border: 2px solid rgb(34, 212, 64);
+}
+
+input.invalidSubmit.ng-invalid{
+	border: 2px solid red;
+}

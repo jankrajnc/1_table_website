@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { CarRestService } from '../apis/car-rest.service';
+import { CarRest } from '../apis/car-rest';
+import { GeneralUtil } from '../utils/general-util';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ConfirmationModalComponent } from '../components/confirmation-modal.component';
+import { ConfirmationModalComponent } from '../components/modal-windows/confirmation-modal.component';
 
 @Component({
   selector: 'car-actions',
@@ -30,7 +31,8 @@ export class CarTableActions implements ICellRendererAngularComp {
 
   /*----- Variables -----*/
   private params: any;
-  private carRestService = new CarRestService(this.http);
+  private carRestService: CarRest = new CarRest(this.http);
+  private generalUtil: GeneralUtil = new GeneralUtil(this.modalService);
   private modalRef!: BsModalRef;
 
   /*----- Constructor -----*/
@@ -62,7 +64,8 @@ export class CarTableActions implements ICellRendererAngularComp {
   }
 
   public deleteCar() {
-    this.showConfirmationModal("delete").subscribe((confirmation) => {
+    // turn this into async await.
+    this.generalUtil.showConfirmationModal("delete").subscribe((confirmation) => {
       if (confirmation) {
         this.params.api.updateRowData({ remove: [this.params.data] });
         this.carRestService.deleteCar(this.params.data.id).subscribe();

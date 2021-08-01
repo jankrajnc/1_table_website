@@ -15,7 +15,8 @@ import { ViewCarComponent } from '../pages/car/view-car/view-car.component';
 import { LoginComponent } from '../pages/user/login/login.component';
 import { SignupComponent } from '../pages/user/signup/signup.component';
 import { MainLayoutComponent } from '../layouts/main-layout/main-layout.component';
-import { ConfirmationModalComponent } from '../components/confirmation-modal.component';
+import { ConfirmationModalComponent } from '../components/modal-windows/confirmation-modal.component';
+import { InformationModalComponent } from '../components/modal-windows/information-modal.component';
 
 
 
@@ -29,7 +30,8 @@ import { ConfirmationModalComponent } from '../components/confirmation-modal.com
     LoginComponent,
     SignupComponent,
     MainLayoutComponent,
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    InformationModalComponent
   ],
   imports: [
     BrowserModule,

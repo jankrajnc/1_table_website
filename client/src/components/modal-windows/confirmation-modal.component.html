@@ -1,9 +1,7 @@
 <div class="alert-box">
     <div class="modal-header">
         <h4 class="modal-title" [innerHTML]="title"></h4>
-        <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close btn-sm" aria-label="Close" (click)="modalRef.hide()"></button>
     </div>
     <div class="modal-body">
         <p class="form-row justify-content-center" [innerHTML]="content"></p>

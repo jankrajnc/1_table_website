@@ -1,10 +1,16 @@
-A simple table website to showcase my Angular (and ag-grid) knowledge and experiences, as well as to update my current knowledge and include a few new technologies/techniques.
+A table website to showcase my Angular+Node.js+MySQL knowledge and experiences, as well as to update my current knowledge and include a few new technologies/practices. This website is a lite example of what I've made in a professional enviroment. With most knowledge already attained, some reusable code and a few new things, this project took ~50 hours to complete. With just the basic knowledge of the frameworks, this would be a ~250 hour project.
 
 Functionality of the website:
 
-Technology and techniques:
-  - Angular (and ag-grid; frontend) -> showcase my current knowledge and experiences
-  - Node.js + Express.js (backend) -> N/A
-  - MySQL (database) -> update current knowledge
-  - Docker -> get familiar with Docker
-  - OAuth 2.0 (authentication + authorization) -> get familiar with 0Auth 2.0
+Technology and practices:
+  - Frontend:
+    - Angular -> Showcase my current knowledge and experience
+    - Ag-grid -> N/A
+  - Backend:
+    - Node.js + Express.js -> Update my current knowledge and practices, improve testing and the use of some libraries
+  - Database:
+    - MySQL -> N/A
+  Other:
+    - bcrypt (authentication) -> Implement authentication with this library, simple, but I haven't used it before
+    - JWT (authorization) -> Revisit JWT and implement the entire authorization flow
+    - Docker -> Get familiar with Docker

@@ -6,7 +6,7 @@ import { Car } from 'src/models/car';
   providedIn: 'root'
 })
 
-export class CarRestService {
+export class CarRest {
 
   constructor(public http: HttpClient) { }
 

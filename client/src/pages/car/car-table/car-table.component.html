@@ -7,8 +7,7 @@
         </div>
         <div class="p-2 bd-highlight col-5"><input #searchBar type='text' class="form-control form-control-sm"
                 placeholder='Search...' (keyup)='searchTable($event)' /></div>
-        <!--<div class="d-flex ms-auto p-2 bd-highlight row"> -->
-            <div class="d-flex ms-auto p-2">
+        <div class="d-flex ms-auto p-2">
             <div class="col-xs-1"><button class="btn btn-primary me-2" (click)="addCar();">Add
                     Car</button></div>
             <div class="col-xs-1"><button class="btn btn-primary" (click)="clearFilters()">Clear Filters</button>
@@ -20,8 +19,8 @@
     <!-- Table -->
     <div class="tableContainer">
         <ag-grid-angular #carTable class="ag-theme-balham" [columnDefs]="columnDefinitions" [rowData]="carData"
-        [rowSelection]="'multiple'" [animateRows]="true" [pagination]="true" [paginationAutoPageSize]="true"
-        (modelUpdated)="onModelUpdated()">
+            [rowSelection]="'multiple'" [animateRows]="true" [pagination]="true" [paginationAutoPageSize]="true"
+            (modelUpdated)="onModelUpdated()">
         </ag-grid-angular>
     </div>
 

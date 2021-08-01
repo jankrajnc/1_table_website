@@ -1,0 +1,12 @@
+<div class="alert-box">
+    <div class="modal-header">
+        <h4 class="modal-title" [innerHTML]="title"></h4>
+        <button type="button" class="btn-close btn-sm" aria-label="Close" (click)="modalRef.hide()"></button>
+    </div>
+    <div class="modal-body">
+        <p class="form-row justify-content-center" [innerHTML]="content"></p>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-primary" (click)="onConfirm()">OK</button>
+    </div>
+</div>

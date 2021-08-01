@@ -6,6 +6,8 @@ import { CarTableComponent } from '../pages/car/car-table/car-table.component';
 import { AddCarComponent } from '../pages/car//add-car/add-car.component';
 import { EditCarComponent } from '../pages/car/edit-car/edit-car.component';
 import { ViewCarComponent } from '../pages/car/view-car/view-car.component';
+import { LoginComponent } from '../pages/user/login/login.component';
+import { SignupComponent } from '../pages/user/signup/signup.component';
 
 const routes: Routes = [
 
@@ -18,7 +20,9 @@ const routes: Routes = [
       { path: 'car-table', component: CarTableComponent },
       { path: 'add-car', component: AddCarComponent },
       { path: 'edit-car/:idCar', component: EditCarComponent },
-      { path: 'view-car/:idCar', component: ViewCarComponent }
+      { path: 'view-car/:idCar', component: ViewCarComponent },
+      { path: 'signup', component: SignupComponent },
+      { path: 'login', component: LoginComponent }
     ]
   },
 

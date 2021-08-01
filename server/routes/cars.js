@@ -1,12 +1,31 @@
-var express = require('express');
-var router = express.Router();
-var mysql = require('mysql');
+const express = require('express');
+const router = express.Router();
+//const db = require('../db');
 
-var mySqlConnection = mysql.createConnection({
+const mysql = require('mysql');
+
+const mySqlConnection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'root',
   database: 'car_register'
+});
+
+/*router.get('/', async (req, res) => {
+  const { rows } = await db.query(`SELECT * FROM car_register.car ORDER BY id ASC;`, null);
+  res.json(rows[0]);
+})*/
+
+// GET - Get all cars.
+router.get("/", async (req, res) => {
+  try {
+    mySqlConnection.query(`SELECT * FROM car_register.car ORDER BY id ASC;`, function (err, results) {
+      if (err) throw err;
+      res.json(results);
+    });
+  } catch (err) {
+    res.status(500).json(error);
+  }
 });
 
 // GET - Get all cars.
