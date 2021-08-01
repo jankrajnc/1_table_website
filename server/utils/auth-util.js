@@ -1,32 +1,34 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
-async function generateAccessToken(loginData) {
-    return jwt.sign(loginData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "10m" });
-}
-
-async function generateRefreshToken(loginData) {
-    return jwt.sign(loginData, process.env.REFRESH_TOKEN_SECRET);
-}
-
-async function authenticateToken(accessToken) {
-    jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, verifiedJwt) => {
-        if (err) {
-            res.send(err.message)
-        } else {
-            res.send(verifiedJwt)
-        }
-    });
-    /*if (!accessToken) {
-        return false;
+function generateAccessToken(loginData) {
+    try {
+        return jwt.sign(loginData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" });
+    } catch (error) {
+        console.log(error);
     }
+}
 
-    jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if (err) {
+function generateRefreshToken(loginData) {
+    try {
+        return jwt.sign(loginData, process.env.REFRESH_TOKEN_SECRET);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function authenticateToken(accessToken) {
+    try {
+        const tokenData = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+        if (tokenData) {
+            return true;
+        } else {
             return false;
         }
-        return true;
-    });*/
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
 }
 
 module.exports.generateAccessToken = generateAccessToken;

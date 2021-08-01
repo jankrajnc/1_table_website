@@ -28,6 +28,11 @@ export class ConfirmationModalComponent {
                 this.content = "Are you sure want to delete this table entry?";
                 break;
             }
+            case "login": {
+                this.title = "Login required";
+                this.content = "You need to be logged in to access this feature. Do you wish to login?";
+                break;
+            }
         }
     }
 

@@ -37,9 +37,13 @@ router.post('/login', function (req, res) {
     mySqlConnection.query(`SELECT * FROM car_register.user WHERE username=?;`, req.body.username, async function (error, result) {
       if (error) throw error;
       if (await bcrypt.compare(req.body.password, result[0].password)) {
-        const accessToken = await authUtil.generateAccessToken({ username: req.body.username, password: req.body.password });
-        //const refreshToken = await authUtil.generateRefreshToken({ username: req.body.username, password: req.body.password });
+        const accessToken = await authUtil.generateAccessToken({ username: req.body.username, password: result[0].password });
+
+        // While refresh tokens are a vital part of authentication and authorization, I didn't go deeper into them in this application,
+        // because they're easy to understand, but take a good chunk of time to implement properly, which would be wasted here in my opinion.
+        //const refreshToken = await authUtil.generateRefreshToken({ username: req.body.username, password: result[0].password });
         //res.json({ authenticated: true, accessToken: accessToken, refreshToken: refreshToken });
+
         res.json({ authenticated: true, accessToken: accessToken });
       } else {
         res.json({ authenticated: false });
@@ -51,9 +55,10 @@ router.post('/login', function (req, res) {
 });
 
 // POST - Create a new user.
-router.post('/authenticate', async function (req, res) {
+router.post('/authorize', async function (req, res) {
   try {
-    console.log(await authUtil.authenticateToken({ username: req.body.accessToken }));
+    const authenticationStatus = await authUtil.authenticateToken(req.body.accessToken);
+    res.json({ authorized: authenticationStatus });
   } catch (error) {
     res.status(500).json(error);
   }

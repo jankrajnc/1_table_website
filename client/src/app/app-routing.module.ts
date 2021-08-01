@@ -8,6 +8,7 @@ import { EditCarComponent } from '../pages/car/edit-car/edit-car.component';
 import { ViewCarComponent } from '../pages/car/view-car/view-car.component';
 import { LoginComponent } from '../pages/user/login/login.component';
 import { SignupComponent } from '../pages/user/signup/signup.component';
+import { AuthUtil } from '../utils/auth-util';
 
 const routes: Routes = [
 
@@ -18,8 +19,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: CarTableComponent },
       { path: 'car-table', component: CarTableComponent },
-      { path: 'add-car', component: AddCarComponent },
-      { path: 'edit-car/:idCar', component: EditCarComponent },
+      { path: 'add-car', component: AddCarComponent, canActivate: [ AuthUtil ] },
+      { path: 'edit-car/:idCar', component: EditCarComponent, canActivate: [ AuthUtil ] },
       { path: 'view-car/:idCar', component: ViewCarComponent },
       { path: 'signup', component: SignupComponent },
       { path: 'login', component: LoginComponent }

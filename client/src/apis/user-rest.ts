@@ -23,9 +23,9 @@ export class UserRest {
     return this.http.post<User>(url, credentials);
   }
 
-  public authenticate(accessToken: String) {
-    const url = `${this.serverUrl}/authenticate`;
-    return this.http.post<User>(url, accessToken);
+  public authorize(accessToken: String) {
+    const url = `${this.serverUrl}/authorize`;
+    return this.http.post<any>(url, {accessToken: accessToken});
   }
 
 }
