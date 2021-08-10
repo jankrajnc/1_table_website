@@ -6,6 +6,7 @@ import { User } from 'src/models/user';
   providedIn: 'root'
 })
 
+// This API class just connects the cliet with the server via REST calls.
 export class UserRest {
 
   constructor(public http: HttpClient) { }

@@ -1,8 +1,9 @@
+/* ===== Angular ===== */
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+/* ===== Our components ===== */
 import { Car } from 'src/models/car';
 import { CarRest } from '../../../apis/car-rest';
 

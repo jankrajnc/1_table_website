@@ -6,6 +6,7 @@ import { Car } from 'src/models/car';
   providedIn: 'root'
 })
 
+// This API class just connects the cliet with the server via REST calls.
 export class CarRest {
 
   constructor(public http: HttpClient) { }

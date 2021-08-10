@@ -32,12 +32,16 @@ export class InformationModalComponent {
                     + "Please enter a unique name.";
                 break;
             }
+            case "row_selection": {
+                this.title = "Row selection error";
+                this.content = "Multiple rows have been selected. Please select/highlight only one row."
+                break;
+            }
         }
     }
 
     public onConfirm() {
         this.modalRef.hide();
-        window.location.reload();
     }
 
 }

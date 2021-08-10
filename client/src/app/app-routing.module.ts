@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+// Pages and components.
 import { MainLayoutComponent } from '../layouts/main-layout/main-layout.component';
 import { CarTableComponent } from '../pages/car/car-table/car-table.component';
 import { AddCarComponent } from '../pages/car//add-car/add-car.component';

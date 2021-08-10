@@ -1,17 +1,15 @@
-/*----- Angular -----*/
-import { Component, NgZone } from "@angular/core";
+/* ===== Angular ===== */
+import { Component } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+/* ===== External libraries ===== */
 import { ICellRendererAngularComp } from 'ag-grid-angular';
-
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalService } from 'ngx-bootstrap/modal';
+/* ===== Our components ===== */
 import { CarRest } from '../apis/car-rest';
 import { GeneralUtil } from '../utils/general-util';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { ConfirmationModalComponent } from '../components/modal-windows/confirmation-modal.component';
-
+// The HTML code is written here directly, as it's so short and simple that it does no justify a separate file.
 @Component({
   selector: 'car-actions',
   template: `<div class="d-flex flex-row bd-highlight mb-3">
@@ -29,57 +27,54 @@ import { ConfirmationModalComponent } from '../components/modal-windows/confirma
 
 export class CarTableActions implements ICellRendererAngularComp {
 
-  /*----- Variables -----*/
+  /*========================================================================================*/
+  /* ===== Variables ===== */
+  /*========================================================================================*/
   private params: any;
   private carRestService: CarRest = new CarRest(this.http);
   private generalUtil: GeneralUtil = new GeneralUtil(this.modalService);
-  private modalRef!: BsModalRef;
 
-  /*----- Constructor -----*/
-  constructor(private http: HttpClient, private router: Router, private modalService: BsModalService, private zone: NgZone) {
-  }
+  /*========================================================================================*/
+  /* ===== Constructor ===== */
+  /*========================================================================================*/
+  constructor(private http: HttpClient, private router: Router, private modalService: BsModalService) { }
 
-  /*----- Initializers -----*/
+  /*========================================================================================*/
+  /* ===== Initializers ===== */
+  /*========================================================================================*/
   public agInit(params: any): void {
     this.params = params;
   }
 
-  /*----- Button functions -----*/
+  /*========================================================================================*/
+  /* ===== Button functions ===== */
+  /*========================================================================================*/
+  
+  // Navigates to the view car page.
   public viewCar() {
-    this.zone.run(() => {
-      if (this.params.context != undefined) {
-        this.params.context.componentParent.unloadHandler();
-      }
-      this.router.navigate(["../view-car", this.params.data.id]);
-    });
+    this.router.navigate(["../view-car", this.params.data.id]);
   }
 
+  // Navigates to the edit car page, which checks if the user is authorized to access it.
   public editCar() {
-    this.zone.run(() => {
-      if (this.params.context != undefined) {
-        this.params.context.componentParent.unloadHandler();
-      }
-      this.router.navigate(["../edit-car", this.params.data.id]);
-    });
+    this.router.navigate(["../edit-car", this.params.data.id]);
   }
 
+  // Deletes the selected car, but before it opens a modal window where the user must confirm their action.
   public deleteCar() {
-    // turn this into async await.
     this.generalUtil.showConfirmationModal("delete").subscribe((confirmation) => {
+      console.log(confirmation);
       if (confirmation) {
+        // Immediately remove the deleted entry from the view.
         this.params.api.updateRowData({ remove: [this.params.data] });
         this.carRestService.deleteCar(this.params.data.id).subscribe();
       }
     });
   }
 
-  /*----- General functions -----*/
-  public showConfirmationModal(type: string): Observable<boolean> {
-    this.modalRef = this.modalService.show(ConfirmationModalComponent, { keyboard: true, initialState: { type: type } });
-    return this.modalRef.content.confirmation.pipe(map(value => {
-      return value;
-    }));
-  }
+  /*========================================================================================*/
+  /* ===== General functions ===== */
+  /*========================================================================================*/
 
   public refresh(params: any): boolean {
     return true;

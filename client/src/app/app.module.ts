@@ -3,9 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+// External libraries.
 import { AgGridModule } from 'ag-grid-angular';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
+// Pages and components.
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CarTableComponent } from '../pages/car/car-table/car-table.component';

@@ -1,9 +1,9 @@
+/* ===== Angular ===== */
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-
-//import { AuthUtil } from "../../../utils/auth-util";
+/* ===== Our components ===== */
 import { UserRest } from "../../../apis/user-rest";
 
 @Component({
@@ -14,16 +14,17 @@ import { UserRest } from "../../../apis/user-rest";
 
 export class LoginComponent implements OnInit {
 
-  /*----- Variables -----*/
-  //providers
+  /*========================================================================================*/
+  /* ===== Variables ===== */
+  /*========================================================================================*/
   private userRest: UserRest = new UserRest(this.http);
-
-  //html variables
   public loginData!: FormGroup;
   public toggleCSS = 0;
   public authenticationStatus!: boolean;
 
-  /*----- Constructor -----*/
+  /*========================================================================================*/
+  /* ===== Constructor ===== */
+  /*========================================================================================*/
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
@@ -31,8 +32,11 @@ export class LoginComponent implements OnInit {
     this.initializeForm();
   }
 
-  /*----- Initializers -----*/
-  //initializes the login form
+  /*========================================================================================*/
+  /* ===== Initializers ===== */
+  /*========================================================================================*/
+
+  // Initializes an empty login form.
   private initializeForm() {
     this.loginData = this.formBuilder.group({
       username: [null, Validators.required],
@@ -40,29 +44,33 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  /*----- General functions -----*/
+  /*========================================================================================*/
+  /* ===== Button functions ===== */
+  /*========================================================================================*/
 
-  /*----- Button functions -----*/
-  //logs in the user
+  // Logs the user in.
   public loginUser() {
+    // Check if the data is valid.
     if (this.loginData.valid) {
       this.userRest.login(this.loginData.value).subscribe((returnData: any) => {
+        // If the return is true then the user is authenticated.
         if (returnData.authenticated) {
           this.authenticationStatus = true;
+          // For the purpose of this application we store the access token to the local storage.
           localStorage.setItem("accessToken", returnData.accessToken);
-          setTimeout(() => {
-            this.router.navigate(["../car-table"]);
-          }, 100);
+          // TODO: Login router has to update the navbar, right now it doesn't. Use an emitter or injectable.
+          this.router.navigate(["../car-table"]);
         } else {
           this.authenticationStatus = false;
         }
       });
     } else {
+      // This shows a red border for incorrect fields.
       this.toggleCSS = 1;
     }
   }
 
-  //logs in the user
+  // Cancels the login process and returns you back to the table view.
   public cancelLogin() {
     this.router.navigate(["../car-table"]);
   }

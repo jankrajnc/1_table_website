@@ -1,9 +1,13 @@
+/* ===== Angular ===== */
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+/* ===== External libraries ===== */
+import { BsModalService } from 'ngx-bootstrap/modal';
+/* ===== Our components ===== */
 import { CarRest } from "../../../apis/car-rest";
 import { Car } from "../../../models/car";
+import { GeneralUtil } from "../../../utils/general-util";
 
 
 
@@ -17,36 +21,35 @@ export class CarTableComponent implements OnInit {
   /*========================================================================================*/
   /* ===== Variables ===== */
   /*========================================================================================*/
-
-  // HTML variables.
   @ViewChild('carTable') carTable: any;
   @ViewChild('searchBar') searchBar: any;
   public carData!: Car[];
   public columnDefinitions: any;
-
-  // Other variables.
   private carRestApi: CarRest = new CarRest(this.http);
   private carModel: Car = new Car();
+  private generalUtil: GeneralUtil = new GeneralUtil(this.modalService);
 
+  /*========================================================================================*/
+  /* ===== Constructor ===== */
+  /*========================================================================================*/
+  constructor(private router: Router, private http: HttpClient, private modalService: BsModalService) { }
 
-  constructor(private router: Router, private http: HttpClient) { }
+  /*========================================================================================*/
+  /* ===== Initializer functions ===== */
+  /*========================================================================================*/
 
   ngOnInit(): void {
     this.setColumnDefinitions();
     this.setCarData();
   }
 
-  /*========================================================================================*/
-  /* ===== Initializer functions ===== */
-  /*========================================================================================*/
-
   // Gets column definitions for the table, as well as setting the software count for the column definitions.
   private setColumnDefinitions() {
     this.columnDefinitions = this.carModel.getCarColumnDefinitions();
   }
 
-  //gets data for the table
-  private setCarData() {
+  // Gets data from the database and sets it.
+  public setCarData() {
     this.carRestApi.getCars().subscribe((getData: any) => {
       this.carData = getData;
     });
@@ -61,14 +64,6 @@ export class CarTableComponent implements OnInit {
       this.carTable.api.hideOverlay();
     }
   }
-
-  /*========================================================================================*/
-  /* ===== General functions ===== */
-  /*========================================================================================*/
-
-  /*private selectedRowsErrorDialog() {
-    this.modalRef = this.modalService.show(SelectedRowsModalComponent, { keyboard: true, initialState: { type: "software_entry" }});
-  }*/
 
   /*========================================================================================*/
   /* ===== Button functions ===== */
@@ -95,9 +90,9 @@ export class CarTableComponent implements OnInit {
       sessionStorage.setItem("selectedCar", JSON.stringify(selectedRow[0]));
       this.router.navigate(["../add-car"]);
     }
-    /*else if (selectedRow.length > 1) {
-      this.selectedRowsErrorDialog();
-    }*/
+    else if (selectedRow.length > 1) {
+      this.generalUtil.showInformationModal("row_selection");
+    }
   }
 
   // Removes all set filters.

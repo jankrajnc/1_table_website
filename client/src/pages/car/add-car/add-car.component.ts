@@ -1,8 +1,9 @@
+/* ===== Angular ===== */
 import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+/* ===== Our components ===== */
 import { Car } from 'src/models/car';
 import { CarRest } from '../../../apis/car-rest';
 
@@ -25,6 +26,8 @@ export class AddCarComponent implements OnInit {
   /*========================================================================================*/
   /* ===== Events ===== */
   /*========================================================================================*/
+
+  // We're listening for these events, so that we can remove the selected entry, otherwise it's constantly in storage.
   @HostListener("window:beforeunload", ["$event"])
   unloadHandler() {
     sessionStorage.removeItem("selectedCar");
