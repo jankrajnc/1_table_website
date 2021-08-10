@@ -1,29 +1,34 @@
 const express = require('express');
 const router = express.Router();
-//const db = require('../db');
-const authUtil = require('../utils/auth-util');
-const bcrypt = require('bcrypt');
-
 const mysql = require('mysql');
+const bcrypt = require('bcrypt');
+const authUtil = require('../utils/auth-util');
 
-const mySqlConnection = mysql.createConnection({
+// Pooling is superior so this is not used.
+/*const mySqlConnection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'car_register'
+});*/
+
+const mySqlPool = mysql.createPool({
+  connectionLimit: 3,
   host: 'localhost',
   user: 'root',
   password: 'root',
   database: 'car_register'
 });
 
-// POST - Create a new user.
+// POST - Create a new user (Sign up).
 router.post('/signup', async function (req, res) {
   try {
     // The password is hashed on the server, this means that the sending of data from the client is unsafe.
     // Generally SSL/TLS should be used for a secure connection, but I won't add it for this sample project.
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const secureData = { username: req.body.username, password: hashedPassword };
-    console.log(hashedPassword);
-    console.log(secureData);
-    mySqlConnection.query(`INSERT IGNORE INTO car_register.user SET ?;`, secureData, function (error, results) {
-      if (error) throw error;
+    mySqlPool.query(`INSERT IGNORE INTO car_register.user SET ?;`, secureData, function (error, results) {
+      if (error) return res.status(400).send("Invalid POST data /signup");
       res.json(results);
     });
   } catch (error) {
@@ -31,11 +36,12 @@ router.post('/signup', async function (req, res) {
   }
 });
 
-// POST - Create a new user.
+// POST - Logs the user in based on the password comparison between provided (req.body) data and received data from the server (SELECT statement).
+//        If the user is authenticated, then an access token is generated for authorization purposes of the application.
 router.post('/login', function (req, res) {
   try {
-    mySqlConnection.query(`SELECT * FROM car_register.user WHERE username=?;`, req.body.username, async function (error, result) {
-      if (error) throw error;
+    mySqlPool.query(`SELECT * FROM car_register.user WHERE username=?;`, req.body.username, async function (error, result) {
+      if (error || result.length == 0) return res.status(400).send("Invalid POST data /login");
       if (await bcrypt.compare(req.body.password, result[0].password)) {
         const accessToken = await authUtil.generateAccessToken({ username: req.body.username, password: result[0].password });
 
@@ -54,11 +60,24 @@ router.post('/login', function (req, res) {
   }
 });
 
-// POST - Create a new user.
+// POST - Authorizes the user, based on his access token, and returns the boolean result as an object.
 router.post('/authorize', async function (req, res) {
   try {
     const authenticationStatus = await authUtil.authenticateToken(req.body.accessToken);
     res.json({ authorized: authenticationStatus });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// DELETE - Delete a user based on the provided ID. TESTING USE ONLY.
+router.delete("/:id", function (req, res) {
+  try {
+    let id = req.params.id;
+    mySqlPool.query(`DELETE FROM car_register.user WHERE id=${id};`, function (error, results) {
+      if (error) throw error;
+      res.json(results);
+    });
   } catch (error) {
     res.status(500).json(error);
   }
