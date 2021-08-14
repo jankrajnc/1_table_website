@@ -73,8 +73,7 @@ router.post('/authorize', async function (req, res) {
 // DELETE - Delete a user based on the provided ID. TESTING USE ONLY.
 router.delete("/:id", function (req, res) {
   try {
-    let id = req.params.id;
-    mySqlPool.query(`DELETE FROM car_register.user WHERE id=${id};`, function (error, results) {
+    mySqlPool.query(`DELETE FROM car_register.user WHERE id=?;`, [req.params.id], function (error, results) {
       if (error) throw error;
       res.json(results);
     });

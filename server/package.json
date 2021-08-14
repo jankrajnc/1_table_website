@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "debug": "node ./bin/www --inspect",
     "dev": "nodemon --inspect app.js",
     "test": "mocha ./tests/*.test.js",
     "coverage": "nyc --reporter=html npm run test"

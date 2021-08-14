@@ -33,8 +33,7 @@ router.get("/", (req, res) => {
 // GET - Get a car based on the provided ID.
 router.get("/:id", function (req, res) {
   try {
-    const id = req.params.id;
-    mySqlPool.query(`SELECT * FROM car_register.car WHERE id=${id};`, function (error, results) {
+    mySqlPool.query(`SELECT * FROM car_register.car WHERE id=?;`, [req.params.id], function (error, results) {
       if (error) throw error;
       res.json(results);
     });
@@ -59,9 +58,8 @@ router.post('/', function (req, res) {
 // PUT - Update a car based on the provided ID and updated car data contained in req.body.
 router.put('/:id', function (req, res) {
   try {
-    const id = req.params.id;
-    mySqlPool.query(`UPDATE car_register.car SET ? WHERE id=${id};`, req.body, function (error, results) {
-      if (error) return res.status(400).send("Invalid PUT data");
+    mySqlPool.query(`UPDATE car_register.car SET ? WHERE id=?;`, [req.body, req.params.id], function (error, results) {
+      if (error) { return res.status(400).send("Invalid PUT data"); }
       res.json(results);
     });
   } catch (error) {
@@ -72,8 +70,8 @@ router.put('/:id', function (req, res) {
 // DELETE - Delete a car based on the provided ID.
 router.delete("/:id", function (req, res) {
   try {
-    let id = req.params.id;
-    mySqlPool.query(`DELETE FROM car_register.car WHERE id=${id};`, function (error, results) {
+    // Here I'll use an alternative way of preventing SQL injections.
+    mySqlPool.query(`DELETE FROM car_register.car WHERE id=${mySqlPool.escape(req.params.id)};`, function (error, results) {
       if (error) throw error;
       res.json(results);
     });

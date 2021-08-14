@@ -12,7 +12,7 @@ describe("Cars API", () => {
     /* ===== GET API ===== */
     /*========================================================================================*/
     describe("GET /cars API", () => {
-        it("GET /car - Invalid router path should return 404", (done) => {
+        /*it("GET /car - Invalid router path should return 404", (done) => {
             chai.request(app)
                 .get("/car")
                 .end((err, res) => {
@@ -60,6 +60,18 @@ describe("Cars API", () => {
                 });
             done();
         });
+
+        it("GET /cars/:id - SQL GET injection, should return one car only", (done) => {
+            chai.request(app)
+                .get("/cars/3 OR 1=1")
+                .end((err, res) => {
+                    if (err) done(err);
+                    expect(res).to.have.status(200);
+                    expect(res.body.length).to.be.eq(1);
+                });
+            done();
+        });*/
+
     });
 
     /*========================================================================================*/
@@ -126,6 +138,21 @@ describe("Cars API", () => {
                     done();
                 });
         });
+
+        it('PUT /cars/:id - SQL injection - Should fail due to database settings', (done) => {
+            const car = {
+                price: Math.floor(Math.random() * 100000),
+            }
+            chai.request(app)
+                .put('/cars/"105 OR 1=1"')
+                .send(car)
+                .end((err, res) => {
+                    if (err) done(err);
+                    expect(res).to.have.status(400);
+                    done();
+                });
+        });
+
     });
 
     /*========================================================================================*/
