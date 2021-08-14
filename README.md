@@ -33,6 +33,7 @@
   - **Other**:
     - bcrypt (authentication) => Implement authentication with this library, simple, but I haven't used it before
     - JWT (authorization) => Revisit JWT and implement the entire authorization flow
+    - Git + GitHub => Practice Git after using SVN for a couple of years
 
 #### TODOs:
   - Client side tests,
