@@ -12,7 +12,7 @@ describe("Cars API", () => {
     /* ===== GET API ===== */
     /*========================================================================================*/
     describe("GET /cars API", () => {
-        /*it("GET /car - Invalid router path should return 404", (done) => {
+        it("GET /car - Invalid router path should return 404", (done) => {
             chai.request(app)
                 .get("/car")
                 .end((err, res) => {
@@ -70,7 +70,7 @@ describe("Cars API", () => {
                     expect(res.body.length).to.be.eq(1);
                 });
             done();
-        });*/
+        });
 
     });
 
@@ -113,8 +113,10 @@ describe("Cars API", () => {
                 .send(car)
                 .end((err, res) => {
                     if (err) done(err);
+                    console.log(err);
                     expect(res).to.have.status(400);
-                    expect(res.error.text).to.be.eq("Invalid POST data");
+                    expect(res).to.be.json;
+                    expect(res).to.be.an("object");
                     done();
                 });
         });
@@ -149,6 +151,8 @@ describe("Cars API", () => {
                 .end((err, res) => {
                     if (err) done(err);
                     expect(res).to.have.status(400);
+                    expect(res).to.be.json;
+                    expect(res).to.be.an("object");
                     done();
                 });
         });

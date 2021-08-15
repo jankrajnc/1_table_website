@@ -4,47 +4,27 @@ const carDb = require('../db/car-db');
 
 // GET - All entries.
 router.get("/", (req, res) => {
-  try {
-    carDb.getCars(res);
-  } catch (error) {
-    res.status(500).json(error);
-  }
+  carDb.getCars(res);
 });
 
 // GET - One entry.
 router.get("/:id", function (req, res) {
-  try {
-    carDb.getCar(req, res);
-  } catch (error) {
-    res.status(500).json(error);
-  }
+  carDb.getCar(req, res);
 });
 
 // POST.
 router.post('/', function (req, res) {
-  try {
-    carDb.createCar(req, res);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-})
+  carDb.createCar(req, res);
+});
 
 // PUT.
 router.put('/:id', function (req, res) {
-  try {
-    carDb.updateCar(req, res);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-})
+  carDb.updateCar(req, res);
+});
 
 // DELETE.
 router.delete("/:id", function (req, res) {
-  try {
-    carDb.deleteCar(req, res);
-  } catch (error) {
-    res.status(500).json(error);
-  }
+  carDb.deleteCar(req, res);
 });
 
 module.exports = router;

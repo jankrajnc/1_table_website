@@ -28,11 +28,12 @@
   - **Backend**:
     - Node.js + Express.js => Update my current knowledge and practices, improve testing and the use of some libraries
     - Mocha + Chai (testing) + nyc (coverage) => Expand my usage of tests for the server-side of the application
+    - Winston (logging) => Improve my usage of logs
+    - bcrypt (authentication) => Implement authentication with this library, simple, but I haven't used it before
+    - JWT (authorization) => Revisit JWT and implement the entire authorization flow
   - **Database**:
     - MySQL => N/A
   - **Other**:
-    - bcrypt (authentication) => Implement authentication with this library, simple, but I haven't used it before
-    - JWT (authorization) => Revisit JWT and implement the entire authorization flow
     - Git + GitHub => Practice Git after using SVN for a couple of years
 
 #### TODOs:

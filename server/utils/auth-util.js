@@ -1,5 +1,6 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const logger = require("../utils/log-util").getLogger();
 
 // Generates the access token with the login data (username and password) and the secret, that's stored as an environmental variable.
 // Expiration time is set to 1 hour.
@@ -7,7 +8,7 @@ function generateAccessToken(loginData) {
     try {
         return jwt.sign(loginData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" });
     } catch (error) {
-        console.log(error);
+        logger.error(JSON.stringify(error));
         return null;
     }
 }
@@ -17,7 +18,7 @@ function generateRefreshToken(loginData) {
     try {
         return jwt.sign(loginData, process.env.REFRESH_TOKEN_SECRET);
     } catch (error) {
-        console.log(error);
+        logger.error(JSON.stringify(error));
         return null;
     }
 }
@@ -32,7 +33,7 @@ function authenticateToken(accessToken) {
             return false;
         }
     } catch (error) {
-        console.log(error);
+        logger.error(JSON.stringify(error));
         return false;
     }
 }

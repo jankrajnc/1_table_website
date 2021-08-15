@@ -41,7 +41,6 @@ describe("Cars API", () => {
                 .end((err, res) => {
                     if (err) done(err);
                     expect(res).to.have.status(400);
-                    expect(res.error.text).to.be.eq("Invalid POST data /signup");
                     done();
                 });
         });*/
@@ -78,7 +77,6 @@ describe("Cars API", () => {
                 .end((err, res) => {
                     if (err) done(err);
                     expect(res).to.have.status(400);
-                    expect(res.error.text).to.be.eq("Invalid POST data /login")
                     done();
                 });
         }).timeout(3000);
