@@ -113,7 +113,6 @@ describe("Cars API", () => {
                 .send(car)
                 .end((err, res) => {
                     if (err) done(err);
-                    console.log(err);
                     expect(res).to.have.status(400);
                     expect(res).to.be.json;
                     expect(res).to.be.an("object");

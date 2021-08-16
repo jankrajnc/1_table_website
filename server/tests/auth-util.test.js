@@ -1,5 +1,4 @@
 const expect = require("chai").expect;
-const assert = require("assert");
 const authUtil = require("../utils/auth-util");
 
 // We won't be testing the generateRefreshToken() function, as it's the same as the access token and it's not used anywhere.
@@ -12,8 +11,7 @@ describe("Auth util", () => {
         it("Missing data - should fail", () => {
             const loginData = null;
             accessToken = authUtil.generateAccessToken(loginData);
-            console.log("TEST123:" + accessToken);
-            assert.equal(accessToken, null);
+            expect(accessToken).to.be.eq(null);
         });
 
         it("Valid data - should generate token", () => {

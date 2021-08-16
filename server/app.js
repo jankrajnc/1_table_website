@@ -5,9 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const helmet = require("helmet");
 
-const indexRouter = require('./routes/index');
-const userRouter = require('./routes/users');
-const carRouter = require('./routes/cars');
+const routingUtility = require('./utils/routing-util');
 
 const app = express();
 
@@ -31,10 +29,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-// Routes.
-app.use('/', indexRouter);
-app.use('/users', userRouter);
-app.use('/cars', carRouter);
+// Loading the routing module.
+routingUtility.mountRoutes(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
